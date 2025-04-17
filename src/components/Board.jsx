@@ -1,58 +1,79 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 import styles from '../CSS/Board.module.css';
 
-class Board extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            boardCreated: false,
-            board: [],
-            boardWidth: 0,
-            boardHeight: 0,
-            flags: 0,
-            mines: 0,
-            difficulty: 'easy',
-        };
-        this.createBoard = this.createBoard.bind(this);
-        this.selectRef = React.createRef();
-    }
-    createBoard() {
-        const selectedValue = this.selectRef.current.value;
-        if (selectedValue === 'D1') {
-            alert("easy");
-        }
-        else if (selectedValue === 'D2') {
-            alert("medium");
-        }
-        else if (selectedValue === 'D3') {
-            alert("hard");
-        }
-        else if (selectedValue === 'D4') {
-            alert("expert");
-        }
-    }
+function Board({ width, height, mines }) {
+    const [flags, setFlags] = useState(0);
+    const [board, setBoard] = useState([]);
 
-    render() {
-        return (
-            <div>
-                <h1>Minesweeper</h1>
-                <div className={styles.menu}>
-                    <select id="difficultyDropdown" ref={this.selectRef}>
-                        <option value="D1">Easy</option>
-                        <option value="D2">Medium</option>
-                        <option value="D3">Hard</option>
-                        <option value="D4">Expert</option>
-                    </select>
-                    <div className={styles.initButton} onClick={this.createBoard}>
-                        Create Board
-                    </div>
-                </div>
-            </div>
-        );
-    }
+    const addFlag = () => {
+        setFlags(prev => prev + 1);
+    };
+
+    // Board creation logic here...
+
+    return (
+        <div>
+            <p>Flags: {flags}</p>
+            <table>
+                <tbody>
+                {/* Generate board cells based on width and height */}
+                {board.map((row, i) => (
+                    <tr key={i}>
+                        {row.map((cell, j) => (
+                            <td key={`${i}-${j}`} onClick={addFlag}>
+                                {cell}
+                            </td>
+                        ))}
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+        </div>
+    );
 }
 
 export default Board;
+
+// import React, {Component} from 'react';
+// import styles from '../CSS/Board.module.css';
+//
+// class Board extends Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             board: [],
+//             boardWidth: 0,
+//             boardHeight: 0,
+//             flags: 0,
+//             mines: 0,
+//         };
+//         this.createBoard = this.createBoard.bind(this);
+//         this.addFlag = this.addFlag.bind(this);
+//         this.selectRef = React.createRef();
+//     }
+//     createBoard() {
+//         alert("createBoard");
+//     }
+//     addFlag() {
+//         this.setState({flags: this.state.flags + 1});
+//     }
+//
+//     render() {
+//
+//         return (
+//             <div>
+//                 <table>
+//                     <tbody>
+//                     <tr><td>Cell1</td></tr>
+//                     <tr><td onClick={this.addFlag}>Cell1</td></tr>
+//                     </tbody>
+//                 </table>
+//             </div>
+//         );
+//     }
+// }
+//
+// export default Board;
 
 
 
