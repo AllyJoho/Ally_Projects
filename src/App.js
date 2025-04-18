@@ -1,18 +1,21 @@
-import React from 'react';
-import Board_Menu from './components/Board_Menu';
+import React, { useState } from 'react';
+import BoardMenu from './components/Board_Menu';
 import Board from './components/Board';
 
-let board_element = new Board();
-let menu_element = new Board_Menu();
-menu_element.tieBoard(board_element);
-
 function App() {
-  return (
-    <div className="App">
-      {board_element.render()}
-      {menu_element.render()}
-    </div>
-  );
+    const [setting, setSetting] = useState({
+        win: false,
+        boardWidth: 5,
+        boardHeight: 5,
+        mines: 0,
+        flags: 0
+    });
+    return (
+        <div>
+            <BoardMenu setting={setting} setSetting={setSetting} />
+            <Board setting={setting} setSetting={setSetting} />
+        </div>
+    );
 }
 
 export default App;
