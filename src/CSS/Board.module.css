@@ -3,10 +3,21 @@
     justify-content: space-around;
 }
 .initButton{
-    background-color: red;
+    background-color: blue;
     color: white;
     padding: 10px;
 }
 .initButton:hover{
     background-color: green;
+}
+.table{
+    text-align: center;
+    border-collapse: collapse;
+    width: 60vh;
+    height: 60vh;
+    margin: 0 auto;
+}
+.table td{
+    border: 15px solid black;
+    padding: 10px;
 }
